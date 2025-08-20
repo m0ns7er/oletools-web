@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Oletools Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📂 Oletools Web Analyzer</h1>
+
+        <form action="/analyze" method="post" enctype="multipart/form-data">
+            <label>Select File:</label>
+            <input type="file" name="file" required><br><br>
+
+            <label>Choose Tool:</label>
+            <select name="tool" required>
+                <option value="oleid">oleid (metadata)</option>
+                <option value="olevba">olevba (VBA macros)</option>
+                <option value="mraptor">mraptor (macro heuristics)</option>
+            </select><br><br>
+
+            <button type="submit">Analyze</button>
+        </form>
+
+        {% if output %}
+        <div class="result">
+            <h2>🔎 Analysis Result ({{ tool }})</h2>
+            <pre>{{ output }}</pre>
+            {% if error %}
+            <h3>⚠️ Errors</h3>
+            <pre>{{ error }}</pre>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
